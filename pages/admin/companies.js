@@ -6,7 +6,7 @@ import Image from 'next/image';
 import BlackDownTriangle from '@/assets/BlackDownTriangle.svg';
 import CrossLogoWhite from '@/assets/crossLogoWhite.svg';
 import SearchLogo from '@/assets/SearchLogo.svg';
-import JobsAndCompaniesModal from '@/components/JobsAndCompaniesModal';
+import CompaniesModal from '@/components/CompaniesModal';
 
 const links = [
   { label: 'Google', url: 'https://www.google.com' },
@@ -47,7 +47,7 @@ const JobsAndCompanies = () => {
           </div>
         </div>
         {/* Modal */}
-        <JobsAndCompaniesModal
+        <CompaniesModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
         />

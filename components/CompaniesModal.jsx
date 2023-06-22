@@ -1,0 +1,196 @@
+import React, { useState } from 'react';
+import Image from 'next/image';
+import CrossLogoWhite from '@/assets/crossLogoWhite.svg';
+import CanalLogo from '@/assets/CanalLogo.png';
+import DegreedLogo from '@/assets/degreedLogo.png';
+import DiscordLogo from '@/assets/DiscordLogo.jpeg';
+import ReactTimeago from 'react-timeago';
+import SaveOutlineButton from '@/components/SaveOutlineButton';
+import RightArrow from '@/assets/RightArrow.svg';
+import RecommendedCard from './RecommendedCard';
+import UpcomingSlide from './UpcomingSlide';
+import { useDispatch, useSelector } from 'react-redux';
+import { postsActions } from '@/store/posts-slice';
+import { useEffect } from 'react';
+import InputField from '@/components/InputField';
+import DropDown from './DropDown';
+import Input from './Input';
+import UrlField from './UrlField';
+import TiptapEditor from '@/components/TiptapEditor';
+import ColouredButton from './ColouredButton';
+
+const companySizeOptions = [
+  '< 10 employees',
+  '10-50 employees',
+  '51-100 employees',
+  '101-500 employees',
+  '501-1000 employees',
+  '1001-10000 employees',
+  '10000+ employees',
+];
+
+const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
+  const dispatch = useDispatch();
+
+  const [companyName, setCompanyName] = useState('');
+  const [companyNameError, setCompanyNameError] = useState(false);
+  const [companyWebsite, setCompanyWebsite] = useState('');
+  const [companyWebsiteError, setCompanyWebsiteError] = useState(false);
+  const [companyDescription, setCompanyDescription] = useState('');
+  const [companyDescriptionError, setCompanyDescriptionError] = useState(false);
+  const [companyLogo, setCompanyLogo] = useState('');
+  const [companyLogoError, setCompanyLogoError] = useState(false);
+  const [companySize, setCompanySize] = useState('');
+  const [companySizeError, setCompanySizeError] = useState(false);
+  const [companyTagline, setCompanyTagline] = useState('');
+  const [companyTaglineError, setCompanyTaglineError] = useState(false);
+  const [companyLinkedinUrl, setCompanyLinkedinUrl] = useState('');
+  const [companyLinkedinUrlError, setCompanyLinkedinUrlError] = useState(false);
+  const [companyCarreerUrl, setCompanyCarreerUrl] = useState('');
+  const [companyCarreerUrlError, setCompanyCarreerUrlError] = useState(false);
+  const [companyAstCareerUrl, setCompanyAstCareerUrl] = useState('');
+  const [companyAstCareerUrlError, setCompanyAstCareerUrlError] =
+    useState(false);
+  const [companyKeyWords, setCompanyKeyWords] = useState('');
+  const [companyKeyWordsError, setCompanyKeyWordsError] = useState(false);
+  const [aboutCompany, setAboutCompany] = useState('');
+  const [aboutCompanyError, setAboutCompanyError] = useState(false);
+
+  const handelClose = () => {
+    setIsModalOpen(false);
+  };
+
+  return (
+    <div
+      className={`min-w-screen min-h-screen w-full h-full fixed top-0 left-0 bg-black/50  z-[200] flex items-center justify-center transform  mobile-lg:px-[6rem] ${
+        isModalOpen ? ' scale-[100%] opacity-[100]' : ' scale-0 opacity-0'
+      }`}>
+      <div
+        className={`block mobile-lg:rounded-lg min-h-screen mobile-lg:min-h-fit bg-white mobile-lg:max-w-[64rem] w-full transform duration-[300ms]   ${
+          isModalOpen ? ' scale-[100%] opacity-[100]' : ' scale-0 opacity-0'
+        } overflow-x-hidden`}>
+        <div className="block mobile-lg:rounded-lg  bg-primary mobile-lg:max-w-[64rem] w-full  max-h-screen overflow-y-auto relative min-h-[5rem] p-10">
+          {/* CloseLogo */}
+          <div
+            onClick={() => handelClose()}
+            className="p-[9px] bg-black/[15%] rounded-full absolute  top-[24px]  right-[24px] cursor-pointer group hover:scale-[125%] hover:bg-black/10 transition-all duration-300">
+            <Image
+              src={CrossLogoWhite}
+              alt="Cross Logo"
+              className={` w-[14px] h-[14px]`}
+            />
+          </div>
+          {/* content */}
+          <div>
+            <h1 className="text-[1.25rem] mb-[15px] leading-[1.375rem] font-semibold text-primary-text">
+              About the company
+            </h1>
+            {/* Logo and company name */}
+            <div className="flex w-full  gap-8 items-center">
+              <div className="bg-blue-200 w-[8rem] h-[8rem] "></div>
+              <div className="flex flex-grow flex-col ">
+                <div className="flex gap-8">
+                  <div className="w-full flex-1 basis-[65%]">
+                    <InputField
+                      label={'Company name'}
+                      placeholder={'Company name'}
+                      errorMessage={'Company Name is required'}
+                      inputValue={companyName}
+                      setInputValue={setCompanyName}
+                      isEmpty={companyNameError}
+                      setIsEmpty={setCompanyNameError}
+                    />
+                  </div>
+                  <div className="w-full flex-1 basis-[45%]">
+                    <DropDown
+                      label1={'Team Size'}
+                      placeholder={'Team Size'}
+                      dropdownList={companySizeOptions}
+                      selectedValue={companySize}
+                      setSelectedValue={setCompanySize}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full">
+                  <Input
+                    label={'tagline'}
+                    placeholder={'Tagline'}
+                    inputValue={companyTagline}
+                    setInputValue={setCompanyTagline}
+                  />
+                </div>
+              </div>
+            </div>
+            {/* company urls */}
+            <div className="grid grid-cols-2 gap-x-8">
+              <UrlField
+                label={'Company website'}
+                errorMessage={'Invalid Url'}
+                placeholder={'Company website'}
+                Url={companyWebsite}
+                setUrl={setCompanyWebsite}
+                UrlError={companyWebsiteError}
+                setUrlError={setCompanyWebsiteError}
+              />
+              <UrlField
+                label={'Company Linkedin'}
+                errorMessage={'Invalid Url'}
+                placeholder={'Company Linkedin'}
+                Url={companyLinkedinUrl}
+                setUrl={setCompanyLinkedinUrl}
+                UrlError={companyLinkedinUrlError}
+                setUrlError={setCompanyLinkedinUrlError}
+              />
+              <UrlField
+                label={'Carreers page'}
+                placeholder={'Carreers page'}
+                errorMessage={'Invalid Url'}
+                Url={companyCarreerUrl}
+                setUrl={setCompanyCarreerUrl}
+                UrlError={companyCarreerUrlError}
+                setUrlError={setCompanyCarreerUrlError}
+              />
+              <UrlField
+                label={'AST Carreers page'}
+                errorMessage={'Invalid Url'}
+                placeholder={'AST Carreers page'}
+                Url={companyAstCareerUrl}
+                setUrl={setCompanyAstCareerUrl}
+                UrlError={companyAstCareerUrlError}
+                setUrlError={setCompanyAstCareerUrlError}
+              />
+            </div>
+            {/* Key words */}
+            <div>
+              <Input
+                label={'Keywords'}
+                placeholder={'Keywords'}
+                inputValue={companyKeyWords}
+                setInputValue={setCompanyKeyWords}
+              />
+            </div>
+            {/* company description */}
+            <div className="mb-[15px]">
+              <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
+                About Company
+              </label>
+              <TiptapEditor setEditorContent={setAboutCompany} />
+            </div>
+            <div className="mb-[25px]">
+              <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
+                Company Description
+              </label>
+              <TiptapEditor setEditorContent={setCompanyDescription} />
+            </div>
+            {/* Save Button */}
+            <div className="flex justify-end">
+              <ColouredButton label={'Save'} className="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CompaniesModal;

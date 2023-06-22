@@ -49,6 +49,12 @@
   padding: 14px;
   min-height: 8rem;
   outline: none;
+  border-radius: 0 0px 8px 8px;
+}
+
+.ProseMirror:focus {
+  outline: 2px solid #000;
+  outline-offset: -2px;
 }
 
 ul {
