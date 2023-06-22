@@ -53,7 +53,7 @@ const SideBar = () => {
         className={`hidden lg:block w-[17.5rem]  min-h-screen h-full flex-shrink-0 z-50 bg-white  `}>
         <div className="px-5 pt-6 ">
           <div className="flex items-center justify-between  ">
-            <Link href="/admin">
+            <Link href="admin">
               <div className="w-[100px] cursor-pointer">
                 <Image src={BrandLogo} alt="Brand Logo" />
               </div>
@@ -81,7 +81,7 @@ const SideBar = () => {
               isActive={active == 'admin'}
               text={'Home'}
               rounded={false}
-              link={' '}
+              link={'admin'}
             />
             <SideBarLinkCard
               logo={JobsLogo}

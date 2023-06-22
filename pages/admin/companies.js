@@ -29,19 +29,8 @@ const links = [
   { label: 'Twitter', url: 'https://www.twitter.com' },
 ];
 
-const JobsAndCompanies = ({
-  DropdownList,
-  Filters,
-  CardList,
-  CardName,
-  Heading,
-  isDropDown,
-}) => {
+const JobsAndCompanies = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handelAddCompany = () => {
-    setIsModalOpen(!isModalOpen);
-  };
 
   return (
     <div className=" bg-white overflow-y-auto">
@@ -51,13 +40,17 @@ const JobsAndCompanies = ({
         {/* Cards section */}
         <div className="  pt-[2.25rem] p-[0.9375rem] ">
           <div className="flex justify-end">
-            <FilterCard name={'Add Company'} onClick={handelAddCompany} />
+            <FilterCard name={'Add Company'} setIsModalOpen={setIsModalOpen} />
           </div>
           <div className="w-full mt-4">
             <GridComponent items={links} />
           </div>
         </div>
         {/* Modal */}
+        <JobsAndCompaniesModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
       </div>
     </div>
   );
