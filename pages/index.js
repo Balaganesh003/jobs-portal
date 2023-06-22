@@ -10,8 +10,7 @@ const inter = Inter({
 export default function Home() {
   const [description, setDescription] = useState('');
   return (
-    <main
-      className={` min-h-screen  items-center justify-between p-24 ${inter.className}`}>
+    <main className={`  items-center justify-between p-24 ${inter.className}`}>
       <TiptapEditor description={description} setDescription={setDescription} />
     </main>
   );

@@ -3,15 +3,6 @@
     margin-top: 0.75em;
   }
 
-  img {
-    height: auto;
-    max-width: 100%;
-
-    &.ProseMirror-selectednode {
-      outline: 3px solid #68cef8;
-    }
-  }
-
   h1 {
     font-size: 24px;
     font-weight: bold;
@@ -37,13 +28,6 @@
     padding: 0 1.5rem;
   }
 
-  a {
-    color: #000;
-    text-decoration: underline;
-    font-weight: 600;
-    font-family: 'graphik-semibold';
-  }
-
   li {
     margin: 0.5em 0;
   }
@@ -63,9 +47,7 @@
 
 .ProseMirror {
   padding: 14px;
-  background: #fff;
-  min-height: 11.25rem;
-  border-radius: 0.5rem;
+  min-height: 8rem;
   outline: none;
 }
 

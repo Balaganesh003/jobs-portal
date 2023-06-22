@@ -7,22 +7,18 @@ import Dropcursor from '@tiptap/extension-dropcursor';
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
 import Link from '@tiptap/extension-link';
-
 import {
-  FaBold,
-  FaItalic,
-  FaListOl,
-  FaListUl,
-  FaUnderline,
-} from 'react-icons/fa';
-
-import {
-  LuHeading1,
-  LuHeading2,
-  LuHeading3,
-  LuRedo2,
-  LuUndo2,
-} from 'react-icons/lu';
+  Bold,
+  Heading1,
+  Heading2,
+  Heading3,
+  List,
+  ListOrdered,
+  Italic,
+  Underline as Underline2,
+  Undo2,
+  Redo2,
+} from 'lucide-react';
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -30,107 +26,154 @@ const MenuBar = ({ editor }) => {
   }
 
   return (
-    <div className="flex items-center justify-between p-[2px] mx-3 mt-3 rounded-lg bg-[#f4f4f4] font-graphik-regular">
-      <div className="flex  items-center gap-1 md:gap-2 lg:gap-3  mb-0 mx-1">
-        <button
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          disabled={!editor.can().chain().focus().toggleBold().run()}
-          className={
-            editor.isActive('bold')
-              ? 'bg-black/[5%] p-2 rounded-lg'
-              : 'hover:bg-black/[5%] p-2 rounded-lg'
-          }>
-          <FaBold className="w-3 h-3" />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          disabled={!editor.can().chain().focus().toggleItalic().run()}
-          className={
-            editor.isActive('italic')
-              ? 'bg-black/[5%] p-2 rounded-lg'
-              : 'hover:bg-black/[5%] p-2 rounded-lg'
-          }>
-          <FaItalic className="w-3 h-3" />
-        </button>
+    <div className="flex items-center px-[10px] py-[6px] space-x-2 sm:space-x-3 md:space-x-4 rounded-t-md bg-black    ">
+      <button
+        onClick={() => editor.chain().focus().toggleBold().run()}
+        disabled={!editor.can().chain().focus().toggleBold().run()}
+        className={
+          editor.isActive('bold')
+            ? ' bg-white/[20%] p-1 rounded '
+            : 'hover:bg-white/[20%] p-1 rounded '
+        }>
+        <Bold
+          strokeWidth={2.5}
+          size={20}
+          absoluteStrokeWidth
+          className="text-white"
+        />
+      </button>
 
-        <button
-          onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={
-            editor.isActive('underline')
-              ? 'bg-black/[5%] p-2 rounded-lg'
-              : 'hover:bg-black/[5%] p-2 rounded-lg'
-          }>
-          <FaUnderline className="w-3 h-3" />
-        </button>
+      <button
+        onClick={() => editor.chain().focus().toggleItalic().run()}
+        disabled={!editor.can().chain().focus().toggleItalic().run()}
+        className={
+          editor.isActive('italic')
+            ? ' bg-white/[20%] p-1 rounded '
+            : 'hover:bg-white/[20%] p-1 rounded '
+        }>
+        <Italic
+          strokeWidth={2.5}
+          size={20}
+          absoluteStrokeWidth
+          className="text-white"
+        />
+      </button>
 
-        <button
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={
-            editor.isActive('bulletList')
-              ? 'bg-black/[5%] p-2 rounded-lg'
-              : 'hover:bg-black/[5%] p-2 rounded-lg'
-          }>
-          <FaListUl className="w-3 h-3" />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={
-            editor.isActive('orderedList')
-              ? 'bg-black/[5%] p-2 rounded-lg'
-              : 'hover:bg-black/[5%] p-2 rounded-lg'
-          }>
-          <FaListOl className="w-3 h-3" />
-        </button>
-        {/* h1 */}
+      <button
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        className={
+          editor.isActive('underline')
+            ? ' bg-white/[20%] p-1 rounded'
+            : 'hover:bg-white/[20%] p-1 rounded '
+        }>
+        <Underline2
+          strokeWidth={2.5}
+          size={20}
+          absoluteStrokeWidth
+          className="text-white"
+        />
+      </button>
 
-        {/* h2 */}
-        <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          className={
-            editor.isActive('heading', { level: 1 })
-              ? 'bg-black/[5%] p-2 rounded-lg'
-              : 'hover:bg-black/[5%] p-2 rounded-lg'
-          }>
-          <LuHeading1 className="w-3 h-3" />
-        </button>
-        {/* h3 */}
-        <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
-          className={
-            editor.isActive('heading', { level: 2 })
-              ? 'bg-black/[5%] p-2 rounded-lg'
-              : 'hover:bg-black/[5%] p-2 rounded-lg'
-          }>
-          <LuHeading2 className="w-3 h-3" />
-        </button>
-        {/* undo */}
-        <button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }
-          className={
-            editor.isActive('heading', { level: 3 })
-              ? 'bg-black/[5%] p-2 rounded-lg'
-              : 'hover:bg-black/[5%] p-2 rounded-lg'
-          }>
-          <LuHeading3 className="w-3 h-3" />
-        </button>
-        {/* redo */}
-        <button
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().chain().focus().undo().run()}>
-          <LuUndo2 className="w-3 h-3 font-bold" />
-        </button>
-        <button
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().chain().focus().redo().run()}>
-          <LuRedo2 className="w-3 h-3" />
-        </button>
-      </div>
+      <button
+        onClick={() => editor.chain().focus().toggleBulletList().run()}
+        className={
+          editor.isActive('bulletList')
+            ? ' bg-white/[20%] p-1 rounded'
+            : 'hover:bg-white/[20%] p-1 rounded'
+        }>
+        <List
+          strokeWidth={2.5}
+          size={20}
+          absoluteStrokeWidth
+          className="text-white"
+        />
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        className={
+          editor.isActive('orderedList')
+            ? ' bg-white/[20%] p-1 rounded'
+            : 'hover:bg-white/[20%] p-1 rounded'
+        }>
+        <ListOrdered
+          strokeWidth={2.5}
+          size={20}
+          absoluteStrokeWidth
+          className="text-white"
+        />
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+        className={
+          editor.isActive('heading', { level: 1 })
+            ? ' bg-white/[20%] p-1 rounded'
+            : 'hover:bg-white/[20%] p-1 rounded'
+        }>
+        <Heading1
+          strokeWidth={2.5}
+          size={20}
+          absoluteStrokeWidth
+          className="text-white"
+        />
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        className={
+          editor.isActive('heading', { level: 2 })
+            ? ' bg-white/[20%] p-1 rounded'
+            : 'hover:bg-white/[20%] p-1 rounded'
+        }>
+        <Heading2
+          strokeWidth={2.5}
+          size={20}
+          absoluteStrokeWidth
+          className="text-white"
+        />
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+        className={
+          editor.isActive('heading', { level: 3 })
+            ? ' bg-white/[20%] p-1 rounded'
+            : 'hover:bg-white/[20%] p-1 rounded'
+        }>
+        <Heading3
+          strokeWidth={2.5}
+          size={20}
+          absoluteStrokeWidth
+          className="text-white"
+        />
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().undo().run()}
+        disabled={!editor.can().chain().focus().undo().run()}>
+        <div className="hover:bg-white/20 p-1 cursor-pointer rounded">
+          <Undo2
+            strokeWidth={2.5}
+            size={20}
+            absoluteStrokeWidth
+            className="text-white "
+          />
+        </div>
+      </button>
+
+      <button
+        onClick={() => editor.chain().focus().redo().run()}
+        disabled={!editor.can().chain().focus().redo().run()}>
+        <div className="hover:bg-white/20 p-1 cursor-pointer rounded">
+          <Redo2
+            strokeWidth={2.5}
+            size={20}
+            absoluteStrokeWidth
+            className="text-white"
+          />
+        </div>
+      </button>
     </div>
   );
 };
@@ -166,7 +209,7 @@ const TiptapEditor = ({ setDescription }) => {
   });
 
   return (
-    <div className="w-full bg-white border-[1px] rounded-lg border-black">
+    <div className="w-full  bg-white border-[2px] rounded-lg border-black">
       <MenuBar editor={editor} className="menubar" />
       <EditorContent editor={editor} className="" />
     </div>
