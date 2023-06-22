@@ -2,35 +2,15 @@ import React, { useEffect } from 'react';
 import FilterCard from '@/components/FilterCard';
 import { useState } from 'react';
 import GridComponent from '@/components/CompaniesGrid';
-import Image from 'next/image';
-import BlackDownTriangle from '@/assets/BlackDownTriangle.svg';
-import CrossLogoWhite from '@/assets/crossLogoWhite.svg';
-import SearchLogo from '@/assets/SearchLogo.svg';
 import CompaniesModal from '@/components/CompaniesModal';
+import { useSelector } from 'react-redux';
 
-const links = [
-  { label: 'Google', url: 'https://www.google.com' },
-  { label: 'Facebook', url: 'https://www.facebook.com' },
-  { label: 'Twitter', url: 'https://www.twitter.com' },
-  { label: 'Google', url: 'https://www.google.com' },
-  { label: 'Facebook', url: 'https://www.facebook.com' },
-  { label: 'Twitter', url: 'https://www.twitter.com' },
-  { label: 'Google', url: 'https://www.google.com' },
-  { label: 'Facebook', url: 'https://www.facebook.com' },
-  { label: 'Twitter', url: 'https://www.twitter.com' },
-  { label: 'Google', url: 'https://www.google.com' },
-  { label: 'Facebook', url: 'https://www.facebook.com' },
-  { label: 'Twitter', url: 'https://www.twitter.com' },
-  { label: 'Google', url: 'https://www.google.com' },
-  { label: 'Facebook', url: 'https://www.facebook.com' },
-  { label: 'Twitter', url: 'https://www.twitter.com' },
-  { label: 'Google', url: 'https://www.google.com' },
-  { label: 'Facebook', url: 'https://www.facebook.com' },
-  { label: 'Twitter', url: 'https://www.twitter.com' },
-];
-
-const JobsAndCompanies = () => {
+const Companies = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { companiesList } = useSelector((state) => state.company);
+
+  useEffect(() => {}, [companiesList]);
 
   return (
     <div className=" bg-white overflow-y-auto">
@@ -43,7 +23,7 @@ const JobsAndCompanies = () => {
             <FilterCard name={'Add Company'} setIsModalOpen={setIsModalOpen} />
           </div>
           <div className="w-full mt-4">
-            <GridComponent items={links} />
+            <GridComponent items={companiesList} />
           </div>
         </div>
         {/* Modal */}
@@ -56,4 +36,4 @@ const JobsAndCompanies = () => {
   );
 };
 
-export default JobsAndCompanies;
+export default Companies;

@@ -8,12 +8,8 @@ import JobsLogo from '@/assets/JobsLogo.svg';
 import CompaniesLogo from '@/assets/CompaniesLogo.svg';
 import EventsLogo from '@/assets/EventsLogo.svg';
 import NotificationLogo from '@/assets/notifications.svg';
-import MikeLogo from '@/assets/mike.png';
 import SettingsLogo from '@/assets/settings.svg';
-import RemoteWorkLogo from '@/assets/remote-work.png';
 import SideBarLinkCard from '@/components/SideBarLinkCard';
-import AllPostsLogo from '@/assets/Community.svg';
-import GeneralAdviceLogo from '@/assets/general-advice.png';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -53,7 +49,7 @@ const SideBar = () => {
         className={`hidden lg:block w-[17.5rem]  min-h-screen h-full flex-shrink-0 z-50 bg-white  `}>
         <div className="px-5 pt-6 ">
           <div className="flex items-center justify-between  ">
-            <Link href="admin">
+            <Link href="/admin">
               <div className="w-[100px] cursor-pointer">
                 <Image src={BrandLogo} alt="Brand Logo" />
               </div>

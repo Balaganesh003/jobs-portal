@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import postsSlice from './posts-slice';
+import companySlice from './company-slice';
 import uiSlice from './ui-slice';
-import onboardingSlice from './onboarding-slice';
 
 const store = configureStore({
   reducer: {
-    posts: postsSlice.reducer,
+    company: companySlice.reducer,
     ui: uiSlice.reducer,
-    onboarding: onboardingSlice.reducer,
   },
 });
 

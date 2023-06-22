@@ -1,23 +1,16 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import toast, { Toaster } from 'react-hot-toast';
 import CrossLogoWhite from '@/assets/crossLogoWhite.svg';
-import CanalLogo from '@/assets/CanalLogo.png';
-import DegreedLogo from '@/assets/degreedLogo.png';
-import DiscordLogo from '@/assets/DiscordLogo.jpeg';
-import ReactTimeago from 'react-timeago';
-import SaveOutlineButton from '@/components/SaveOutlineButton';
-import RightArrow from '@/assets/RightArrow.svg';
-import RecommendedCard from './RecommendedCard';
-import UpcomingSlide from './UpcomingSlide';
+import crossLogoGray from '@/assets/crossLogoGray.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { postsActions } from '@/store/posts-slice';
-import { useEffect } from 'react';
 import InputField from '@/components/InputField';
 import DropDown from './DropDown';
 import Input from './Input';
 import UrlField from './UrlField';
 import TiptapEditor from '@/components/TiptapEditor';
 import ColouredButton from './ColouredButton';
+import { companyActions } from '@/store/company-slice';
 
 const companySizeOptions = [
   '< 10 employees',
@@ -37,13 +30,9 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
   const [companyWebsite, setCompanyWebsite] = useState('');
   const [companyWebsiteError, setCompanyWebsiteError] = useState(false);
   const [companyDescription, setCompanyDescription] = useState('');
-  const [companyDescriptionError, setCompanyDescriptionError] = useState(false);
   const [companyLogo, setCompanyLogo] = useState('');
-  const [companyLogoError, setCompanyLogoError] = useState(false);
   const [companySize, setCompanySize] = useState('');
-  const [companySizeError, setCompanySizeError] = useState(false);
   const [companyTagline, setCompanyTagline] = useState('');
-  const [companyTaglineError, setCompanyTaglineError] = useState(false);
   const [companyLinkedinUrl, setCompanyLinkedinUrl] = useState('');
   const [companyLinkedinUrlError, setCompanyLinkedinUrlError] = useState(false);
   const [companyCarreerUrl, setCompanyCarreerUrl] = useState('');
@@ -52,12 +41,54 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
   const [companyAstCareerUrlError, setCompanyAstCareerUrlError] =
     useState(false);
   const [companyKeyWords, setCompanyKeyWords] = useState('');
-  const [companyKeyWordsError, setCompanyKeyWordsError] = useState(false);
   const [aboutCompany, setAboutCompany] = useState('');
-  const [aboutCompanyError, setAboutCompanyError] = useState(false);
 
   const handelClose = () => {
     setIsModalOpen(false);
+  };
+
+  const companyObject = {
+    companyName,
+    companyWebsite,
+    companyDescription,
+    companyLogo,
+    companySize,
+    companyTagline,
+    companyLinkedinUrl,
+    companyCarreerUrl,
+    companyAstCareerUrl,
+    companyKeyWords,
+    aboutCompany,
+  };
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setCompanyLogo(e.target.result);
+        console.log(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSave = () => {
+    if (
+      companyName === '' ||
+      companyNameError ||
+      companyWebsiteError ||
+      companyLinkedinUrlError ||
+      companyCarreerUrlError ||
+      companyAstCareerUrlError
+    ) {
+      toast.error('Company name is required');
+      return;
+    } else {
+      dispatch(companyActions.addCompany(companyObject));
+      toast.success('Company added successfully');
+      setIsModalOpen(false);
+    }
   };
 
   return (
@@ -65,6 +96,7 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
       className={`min-w-screen min-h-screen w-full h-full fixed top-0 left-0 bg-black/50  z-[200] flex items-center justify-center transform  mobile-lg:px-[6rem] ${
         isModalOpen ? ' scale-[100%] opacity-[100]' : ' scale-0 opacity-0'
       }`}>
+      <Toaster />
       <div
         className={`block mobile-lg:rounded-lg min-h-screen mobile-lg:min-h-fit bg-white mobile-lg:max-w-[64rem] w-full transform duration-[300ms]   ${
           isModalOpen ? ' scale-[100%] opacity-[100]' : ' scale-0 opacity-0'
@@ -87,7 +119,27 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
             </h1>
             {/* Logo and company name */}
             <div className="flex w-full  gap-8 items-center">
-              <div className="bg-blue-200 w-[8rem] h-[8rem] "></div>
+              <div className="border border-gray-border w-[9rem] h-[9rem]  text-center rounded cursor-pointer relative ">
+                <div className="w-full h-full flex items-center justify-center absolute top-0 left-0">
+                  <Image
+                    src={companyLogo || crossLogoGray}
+                    alt="Drag and drop"
+                    width={64}
+                    height={64}
+                    className={`   ${
+                      companyLogo
+                        ? 'rotate-0 h-full w-full object-contain bg-white'
+                        : 'rotate-45 h-[4rem] w-[4rem]'
+                    }`}
+                  />
+                </div>
+                <input
+                  type="file"
+                  id="resumeInput"
+                  className="w-full h-full  absolute top-0 left-0 cursor-pointer opacity-0"
+                  onChange={handleFileSelect}
+                />
+              </div>
               <div className="flex flex-grow flex-col ">
                 <div className="flex gap-8">
                   <div className="w-full flex-1 basis-[65%]">
@@ -184,7 +236,11 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
             </div>
             {/* Save Button */}
             <div className="flex justify-end">
-              <ColouredButton label={'Save'} className="" />
+              <ColouredButton
+                label={'Save'}
+                className=""
+                handelClick={handleSave}
+              />
             </div>
           </div>
         </div>

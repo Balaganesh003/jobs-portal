@@ -36,14 +36,14 @@ const GridComponent = ({ items }) => {
       <div
         className="grid grid-cols-4 gap-4 w-full"
         style={{ height: containerHeight }}>
-        {columns.map((column, index) => (
+        {columns?.map((column, index) => (
           <div key={index} className="flex gap-2 flex-col">
-            {column.map((item, itemIndex) => (
-              <Link href={`${item.url}`} key={itemIndex}>
+            {column?.map((item, itemIndex) => (
+              <Link href={`${item.companyName}`} key={itemIndex}>
                 <div
                   key={itemIndex}
                   className="p-1 text-link truncate text-ellipsis">
-                  {item.label}
+                  {item.companyName}
                 </div>
               </Link>
             ))}
