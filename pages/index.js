@@ -1,17 +1,19 @@
-import Image from 'next/image';
-import { useState } from 'react';
 import { Inter } from 'next/font/google';
-import TiptapEditor from './components/TiptapEditor';
+import Link from 'next/link';
 
 const inter = Inter({
   subsets: ['latin'],
 });
 
 export default function Home() {
-  const [description, setDescription] = useState('');
   return (
     <main className={`  items-center justify-between p-24 ${inter.className}`}>
-      <TiptapEditor description={description} setDescription={setDescription} />
+      <Link href="/admin" className="block">
+        <p className="text-3xl text-link">Admin</p>
+      </Link>
+      <Link href="/user" className="block">
+        <p className="text-3xl text-link">User</p>
+      </Link>
     </main>
   );
 }
