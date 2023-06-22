@@ -11,7 +11,7 @@ const SideBarLinkCard = ({
   link,
 }) => {
   return (
-    <Link href={`/${link?.toLowerCase()}`} passHref>
+    <Link href={`/${link}`} passHref>
       <div
         onClick={() => handleClick({ text })}
         className={`px-6 h-12 w-full   flex items-center relative cursor-pointer`}>

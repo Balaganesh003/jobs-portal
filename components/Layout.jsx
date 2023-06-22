@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
           </div>
 
           {/* Main */}
-          <main id="main" className="w-full lg:overflow-y-scroll relative">
+          <main id="main" className="w-full lg:overflow-y-auto relative">
             {children}
             {/* Search and dropdown */}
           </main>

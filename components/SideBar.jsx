@@ -26,8 +26,11 @@ const SideBar = () => {
   const router = useRouter();
   const [active, setActive] = useState('');
 
-  const currentPath = router.pathname.split('/')[2];
-  console.log(currentPath);
+  const currentPath = router.pathname.split('/').slice(-1)[0];
+
+  useEffect(() => {
+    setActive(currentPath);
+  }, [currentPath]);
 
   const { isSidebarOpen } = useSelector((state) => state.ui);
 
@@ -75,14 +78,14 @@ const SideBar = () => {
             <SideBarLinkCard
               handleClick={handleClick}
               logo={HomeLogo}
-              isActive={active == ''}
+              isActive={active == 'admin'}
               text={'Home'}
               rounded={false}
               link={' '}
             />
             <SideBarLinkCard
               logo={JobsLogo}
-              isActive={active == 'obs'}
+              isActive={active == 'jobs'}
               text={'Jobs'}
               handleClick={handleClick}
               rounded={false}
@@ -90,7 +93,7 @@ const SideBar = () => {
             />
             <SideBarLinkCard
               logo={EventsLogo}
-              isActive={active == 'Events'}
+              isActive={active == 'events'}
               text={'Events'}
               handleClick={handleClick}
               rounded={false}
@@ -98,7 +101,7 @@ const SideBar = () => {
             />
             <SideBarLinkCard
               logo={CompaniesLogo}
-              isActive={active == 'Companies'}
+              isActive={active == 'companies'}
               text={'Companies'}
               handleClick={handleClick}
               rounded={false}
@@ -147,14 +150,14 @@ const SideBar = () => {
               <SideBarLinkCard
                 handleClick={handleClick}
                 logo={HomeLogo}
-                isActive={active == 'Home'}
+                isActive={active == 'admin'}
                 text={'Home'}
                 rounded={false}
                 link={'home'}
               />
               <SideBarLinkCard
                 logo={JobsLogo}
-                isActive={active == 'Jobs'}
+                isActive={active == 'jobs'}
                 text={'Jobs'}
                 handleClick={handleClick}
                 rounded={false}
@@ -162,7 +165,7 @@ const SideBar = () => {
               />
               <SideBarLinkCard
                 logo={EventsLogo}
-                isActive={active == 'Events'}
+                isActive={active == 'events'}
                 text={'Events'}
                 handleClick={handleClick}
                 rounded={false}
@@ -170,7 +173,7 @@ const SideBar = () => {
               />
               <SideBarLinkCard
                 logo={CompaniesLogo}
-                isActive={active == 'Companies'}
+                isActive={active == 'companies'}
                 text={'Companies'}
                 handleClick={handleClick}
                 rounded={false}
