@@ -3,7 +3,7 @@ import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
 import CrossLogoWhite from '@/assets/crossLogoWhite.svg';
 import crossLogoGray from '@/assets/crossLogoGray.svg';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import InputField from '@/components/InputField';
 import DropDown from './DropDown';
 import Input from './Input';
@@ -22,7 +22,7 @@ const companySizeOptions = [
   '10000+ employees',
 ];
 
-const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
+const CompaniesModal = ({ handelModalOpen, handelModalClose, isModalOpen }) => {
   const dispatch = useDispatch();
 
   const [companyName, setCompanyName] = useState('');
@@ -44,7 +44,8 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
   const [aboutCompany, setAboutCompany] = useState('');
 
   const handelClose = () => {
-    setIsModalOpen(false);
+    handelClear();
+    handelModalClose();
   };
 
   const companyObject = {
@@ -73,27 +74,48 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
     }
   };
 
+  const handelClear = () => {
+    setCompanyName('');
+    setCompanyWebsite('');
+    setCompanyDescription('');
+    setCompanyLogo('');
+    setCompanySize('');
+    setCompanyTagline('');
+    setCompanyLinkedinUrl('');
+    setCompanyCarreerUrl('');
+    setCompanyAstCareerUrl('');
+    setCompanyKeyWords('');
+    setAboutCompany('');
+    setCompanyNameError(false);
+    setCompanyWebsiteError(false);
+    setCompanyLinkedinUrlError(false);
+    setCompanyCarreerUrlError(false);
+    setCompanyAstCareerUrlError(false);
+  };
+
   const handleSave = () => {
     if (
       companyName === '' ||
-      companyNameError ||
-      companyWebsiteError ||
-      companyLinkedinUrlError ||
-      companyCarreerUrlError ||
-      companyAstCareerUrlError
+      companyNameError === true ||
+      companyWebsiteError === true ||
+      companyLinkedinUrlError === true ||
+      companyCarreerUrlError === true ||
+      companyAstCareerUrlError === true ||
+      companyLogo === ''
     ) {
-      toast.error('Company name is required');
+      toast.error('Company name and Logo is required');
       return;
     } else {
       dispatch(companyActions.addCompany(companyObject));
       toast.success('Company added successfully');
-      setIsModalOpen(false);
+      handelClear();
+      handelModalClose();
     }
   };
 
   return (
     <div
-      className={`min-w-screen min-h-screen w-full h-full fixed top-0 left-0 bg-black/50  z-[200] flex items-center justify-center transform  mobile-lg:px-[6rem] ${
+      className={`min-w-screen min-h-screen w-full h-full fixed top-0 left-0 bg-black/50  z-[200] flex items-center justify-center transform mobile-lg:p-[3rem] sm:px-[6rem] ${
         isModalOpen ? ' scale-[100%] opacity-[100]' : ' scale-0 opacity-0'
       }`}>
       <Toaster />
@@ -101,7 +123,7 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
         className={`block mobile-lg:rounded-lg min-h-screen mobile-lg:min-h-fit bg-white mobile-lg:max-w-[64rem] w-full transform duration-[300ms]   ${
           isModalOpen ? ' scale-[100%] opacity-[100]' : ' scale-0 opacity-0'
         } overflow-x-hidden`}>
-        <div className="block mobile-lg:rounded-lg  bg-primary mobile-lg:max-w-[64rem] w-full  max-h-screen overflow-y-auto relative min-h-[5rem] p-10">
+        <div className="block mobile-lg:rounded-lg  bg-primary mobile-lg:max-w-[64rem] w-full  max-h-screen overflow-y-auto relative min-h-[5rem] px-2 mobile-md:px-4 mobile-lg:px-6 md:px-8 py-8">
           {/* CloseLogo */}
           <div
             onClick={() => handelClose()}
@@ -118,9 +140,9 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
               About the company
             </h1>
             {/* Logo and company name */}
-            <div className="flex w-full  gap-8 items-center">
-              <div className="border border-gray-border w-[9rem] h-[9rem]  text-center rounded cursor-pointer relative ">
-                <div className="w-full h-full flex items-center justify-center absolute top-0 left-0">
+            <div className="flex w-full flex-col md:flex-row gap-8 items-center">
+              <div className="border  flex-shrink-0 border-gray-border  w-[9rem] h-[9rem]  text-center rounded cursor-pointer relative ">
+                <div className="w-full h-full flex items-center  justify-center absolute top-0 left-0">
                   <Image
                     src={companyLogo || crossLogoGray}
                     alt="Drag and drop"
@@ -128,7 +150,7 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
                     height={64}
                     className={`   ${
                       companyLogo
-                        ? 'rotate-0 h-full w-full object-contain bg-white'
+                        ? 'rotate-0 h-full w-full object-contain  bg-white'
                         : 'rotate-45 h-[4rem] w-[4rem]'
                     }`}
                   />
@@ -140,8 +162,8 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
                   onChange={handleFileSelect}
                 />
               </div>
-              <div className="flex flex-grow flex-col ">
-                <div className="flex gap-8">
+              <div className="flex flex-grow flex-col w-full">
+                <div className="flex lg:gap-8 flex-col lg:flex-row">
                   <div className="w-full flex-1 basis-[65%]">
                     <InputField
                       label={'Company name'}
@@ -174,7 +196,7 @@ const CompaniesModal = ({ isModalOpen, setIsModalOpen }) => {
               </div>
             </div>
             {/* company urls */}
-            <div className="grid grid-cols-2 gap-x-8">
+            <div className="grid md:grid-cols-2 gap-x-8">
               <UrlField
                 label={'Company website'}
                 errorMessage={'Invalid Url'}

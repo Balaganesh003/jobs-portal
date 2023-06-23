@@ -12,8 +12,6 @@ const UrlField = ({
   setUrlError,
   placeholder,
 }) => {
-  const [isFirstTime, setIsFirstTime] = useState(true);
-
   const isValidUrl = (url) => {
     const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
     return urlPattern.test(url);
@@ -21,13 +19,13 @@ const UrlField = ({
 
   const handleInput = (e) => {
     setUrl(e.target.value);
-    isValidUrl(e.target.value) === false
+    isValidUrl(e.target.value) === false && e.target.value !== ''
       ? setUrlError(true)
       : setUrlError(false);
   };
 
   const checkisValid = () => {
-    if (isValidUrl(Url) === false) {
+    if (isValidUrl(Url) === false && Url !== '') {
       setUrlError(true);
     }
   };
@@ -49,7 +47,7 @@ const UrlField = ({
         onBlur={checkisValid}
         className={`w-full text-[1rem] bg-white h-12 rounded py-[0.1rem] px-[0.875rem] mb-[0.8125rem]  text-primary-text border border-light-gray focus:outline-black`}
       />
-      {UrlError && Url.length > 0 && (
+      {UrlError && (
         <p className="text-[0.75rem] leading-[125%] font-normal text-text-red flex items-center mt-[0.15rem]  ">
           <Image
             src={ErrorIcon}

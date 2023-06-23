@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-hot-toast';
 
 const initialPostsState = {
   companiesList: [],
@@ -10,8 +11,13 @@ const companySlice = createSlice({
   name: 'company',
   initialState: initialPostsState,
   reducers: {
-    addCompany(state, action) {
-      state.companiesList.push(action.payload);
+    addCompany: (state, action) => {
+      const newCompany = action.payload;
+      state.companiesList.some(
+        (company) => company.companyName === newCompany.companyName
+      )
+        ? alert('Company already exists')
+        : state.companiesList.push(newCompany);
     },
   },
 });

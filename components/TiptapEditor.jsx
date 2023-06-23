@@ -3,7 +3,6 @@ import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 import Placeholder from '@tiptap/extension-placeholder';
 import { EditorContent, useEditor } from '@tiptap/react';
-import Dropcursor from '@tiptap/extension-dropcursor';
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
 import Link from '@tiptap/extension-link';
@@ -26,7 +25,7 @@ const MenuBar = ({ editor }) => {
   }
 
   return (
-    <div className="flex items-center px-[10px] py-[6px] space-x-2 sm:space-x-3 md:space-x-4 rounded-t-md bg-black    ">
+    <div className="flex  items-center px-[10px] py-[6px] space-x-[6px] sm:space-x-2 md:space-x-4 rounded-t-md bg-black">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -39,7 +38,7 @@ const MenuBar = ({ editor }) => {
           strokeWidth={2.5}
           size={20}
           absoluteStrokeWidth
-          className="text-white"
+          className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
         />
       </button>
 
@@ -55,7 +54,7 @@ const MenuBar = ({ editor }) => {
           strokeWidth={2.5}
           size={20}
           absoluteStrokeWidth
-          className="text-white"
+          className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
         />
       </button>
 
@@ -70,7 +69,7 @@ const MenuBar = ({ editor }) => {
           strokeWidth={2.5}
           size={20}
           absoluteStrokeWidth
-          className="text-white"
+          className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
         />
       </button>
 
@@ -85,7 +84,7 @@ const MenuBar = ({ editor }) => {
           strokeWidth={2.5}
           size={20}
           absoluteStrokeWidth
-          className="text-white"
+          className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
         />
       </button>
 
@@ -100,7 +99,7 @@ const MenuBar = ({ editor }) => {
           strokeWidth={2.5}
           size={20}
           absoluteStrokeWidth
-          className="text-white"
+          className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
         />
       </button>
 
@@ -109,13 +108,13 @@ const MenuBar = ({ editor }) => {
         className={
           editor.isActive('heading', { level: 1 })
             ? ' bg-white/[20%] p-1 rounded'
-            : 'hover:bg-white/[20%] p-1 rounded'
+            : 'hover:bg-white/[20%] p-1 rounded '
         }>
         <Heading1
           strokeWidth={2.5}
           size={20}
           absoluteStrokeWidth
-          className="text-white"
+          className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
         />
       </button>
 
@@ -130,7 +129,7 @@ const MenuBar = ({ editor }) => {
           strokeWidth={2.5}
           size={20}
           absoluteStrokeWidth
-          className="text-white"
+          className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
         />
       </button>
 
@@ -145,7 +144,7 @@ const MenuBar = ({ editor }) => {
           strokeWidth={2.5}
           size={20}
           absoluteStrokeWidth
-          className="text-white"
+          className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
         />
       </button>
 
@@ -157,7 +156,7 @@ const MenuBar = ({ editor }) => {
             strokeWidth={2.5}
             size={20}
             absoluteStrokeWidth
-            className="text-white "
+            className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
           />
         </div>
       </button>
@@ -170,7 +169,7 @@ const MenuBar = ({ editor }) => {
             strokeWidth={2.5}
             size={20}
             absoluteStrokeWidth
-            className="text-white"
+            className="text-white w-4 h-4 mobile-lg:w-5 mobile-lg:h-5"
           />
         </div>
       </button>
@@ -189,7 +188,7 @@ const TiptapEditor = ({ setEditorContent }) => {
       TextStyle.configure({ types: [ListItem.name] }),
       Link.configure({ types: [ListItem.name] }),
       Underline.configure({ types: [ListItem.name] }),
-      Dropcursor,
+
       StarterKit.configure({
         bulletList: {
           keepMarks: true,
