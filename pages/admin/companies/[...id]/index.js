@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FilterCard from '@/components/FilterCard';
 import CompanyPage from '@/components/CompanyPage';
 import { useRouter } from 'next/router';
-import { useSelector, useDispatch } from 'react-redux';
-import { companyActions } from '@/store/company-slice';
 
 const Filters = [
   {
@@ -21,7 +19,6 @@ const Filters = [
 ];
 const JobsAndCompanies = ({}) => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const companyId =
     router.query.id?.length > 0 ? router.query.id[0] : router.query.id;

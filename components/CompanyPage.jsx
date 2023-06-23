@@ -12,6 +12,8 @@ import { companyActions } from '@/store/company-slice';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import companyDoesNotExist from '@/assets/companyNotExist.svg';
+import Link from 'next/link';
 
 const companySizeOptions = [
   '< 10 employees',
@@ -40,7 +42,7 @@ const CompanyPage = () => {
   const [companyNameError, setCompanyNameError] = useState(false);
   const [companyWebsite, setCompanyWebsite] = useState('');
   const [companyWebsiteError, setCompanyWebsiteError] = useState(false);
-  const [companyDescription, setCompanyDescription] = useState('');
+  const [companyDescription, setCompanyDescription] = useState(null);
   const [companyLogo, setCompanyLogo] = useState('');
   const [companySize, setCompanySize] = useState('');
   const [companyTagline, setCompanyTagline] = useState('');
@@ -52,7 +54,7 @@ const CompanyPage = () => {
   const [companyAstCareerUrlError, setCompanyAstCareerUrlError] =
     useState(false);
   const [companyKeyWords, setCompanyKeyWords] = useState('');
-  const [aboutCompany, setAboutCompany] = useState('');
+  const [aboutCompany, setAboutCompany] = useState(null);
 
   useEffect(() => {
     setCompanyId(selectedCompany?.id);
@@ -96,25 +98,6 @@ const CompanyPage = () => {
     }
   };
 
-  const handelClear = () => {
-    setCompanyName('');
-    setCompanyWebsite('');
-    setCompanyDescription('');
-    setCompanyLogo('');
-    setCompanySize('');
-    setCompanyTagline('');
-    setCompanyLinkedinUrl('');
-    setCompanyCarreerUrl('');
-    setCompanyAstCareerUrl('');
-    setCompanyKeyWords('');
-    setAboutCompany('');
-    setCompanyNameError(false);
-    setCompanyWebsiteError(false);
-    setCompanyLinkedinUrlError(false);
-    setCompanyCarreerUrlError(false);
-    setCompanyAstCareerUrlError(false);
-  };
-
   const handleSave = () => {
     if (
       companyName === '' ||
@@ -135,152 +118,172 @@ const CompanyPage = () => {
   };
 
   return (
-    <div className="block mobile-lg:rounded-lg  bg-white mobile-lg:max-w-[64rem] w-full  h-full overflow-y-auto relative min-h-[5rem] px-2 mobile-md:px-4 mobile-lg:px-6 md:px-8 py-8">
-      <Toaster />
-      {/* content */}
-      <div>
-        <h1 className="text-[1.25rem] mb-[15px] leading-[1.375rem] font-semibold text-primary-text">
-          About the company
-        </h1>
-        {/* Logo and company name */}
-        <div className="flex w-full flex-col md:flex-row gap-8 items-center">
-          <div className="border  flex-shrink-0 border-gray-border  w-[9rem] h-[9rem]  text-center rounded cursor-pointer relative ">
-            <div className="w-full h-full flex items-center  justify-center absolute top-0 left-0">
-              {companyLogo && (
-                <Image
-                  src={companyLogo}
-                  alt="Drag and drop"
-                  width={64}
-                  height={64}
-                  className={`   ${
-                    companyLogo
-                      ? 'rotate-0 h-full w-full object-contain  bg-white'
-                      : 'rotate-45 h-[4rem] w-[4rem]'
-                  }`}
+    <>
+      {companyId != undefined || companyId != null ? (
+        <div className="block mobile-lg:rounded-lg  bg-white mobile-lg:max-w-[64rem] w-full  h-full overflow-y-auto relative min-h-[5rem] px-2 mobile-md:px-4 mobile-lg:px-6 md:px-8 py-8">
+          <Toaster />
+          {/* content */}
+          <div>
+            <h1 className="text-[1.25rem] mb-[15px] leading-[1.375rem] font-semibold text-primary-text">
+              About the company
+            </h1>
+            {/* Logo and company name */}
+            <div className="flex w-full flex-col md:flex-row gap-8 items-center">
+              <div className="border  flex-shrink-0 border-gray-border  w-[9rem] h-[9rem]  text-center rounded cursor-pointer relative ">
+                <div className="w-full h-full flex items-center  justify-center absolute top-0 left-0">
+                  {companyLogo && (
+                    <Image
+                      src={companyLogo}
+                      alt="Drag and drop"
+                      width={64}
+                      height={64}
+                      className={`   ${
+                        companyLogo
+                          ? 'rotate-0 h-full w-full object-contain  bg-white'
+                          : 'rotate-45 h-[4rem] w-[4rem]'
+                      }`}
+                    />
+                  )}
+                </div>
+                <input
+                  type="file"
+                  id="resumeInput"
+                  className="w-full h-full  absolute top-0 left-0 cursor-pointer opacity-0"
+                  onChange={handleFileSelect}
+                />
+              </div>
+              <div className="flex flex-grow flex-col w-full">
+                <div className="flex sm:gap-8 flex-col sm:flex-row">
+                  <div className="w-full flex-1 basis-[65%]">
+                    <InputField
+                      label={'Company name'}
+                      placeholder={'Company name'}
+                      errorMessage={'Company Name is required'}
+                      inputValue={companyName}
+                      setInputValue={setCompanyName}
+                      isEmpty={companyNameError}
+                      setIsEmpty={setCompanyNameError}
+                    />
+                  </div>
+                  <div className="w-full flex-1 basis-[45%]">
+                    <DropDown
+                      label1={'Team Size'}
+                      placeholder={'Team Size'}
+                      dropdownList={companySizeOptions}
+                      selectedValue={companySize}
+                      setSelectedValue={setCompanySize}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full">
+                  <Input
+                    label={'tagline'}
+                    placeholder={'Tagline'}
+                    inputValue={companyTagline}
+                    setInputValue={setCompanyTagline}
+                  />
+                </div>
+              </div>
+            </div>
+            {/* company urls */}
+            <div className="grid sm:grid-cols-2 gap-x-8">
+              <UrlField
+                label={'Company website'}
+                errorMessage={'Invalid Url'}
+                placeholder={'Company website'}
+                Url={companyWebsite}
+                setUrl={setCompanyWebsite}
+                UrlError={companyWebsiteError}
+                setUrlError={setCompanyWebsiteError}
+              />
+              <UrlField
+                label={'Company Linkedin'}
+                errorMessage={'Invalid Url'}
+                placeholder={'Company Linkedin'}
+                Url={companyLinkedinUrl}
+                setUrl={setCompanyLinkedinUrl}
+                UrlError={companyLinkedinUrlError}
+                setUrlError={setCompanyLinkedinUrlError}
+              />
+              <UrlField
+                label={'Carreers page'}
+                placeholder={'Carreers page'}
+                errorMessage={'Invalid Url'}
+                Url={companyCarreerUrl}
+                setUrl={setCompanyCarreerUrl}
+                UrlError={companyCarreerUrlError}
+                setUrlError={setCompanyCarreerUrlError}
+              />
+              <UrlField
+                label={'AST Carreers page'}
+                errorMessage={'Invalid Url'}
+                placeholder={'AST Carreers page'}
+                Url={companyAstCareerUrl}
+                setUrl={setCompanyAstCareerUrl}
+                UrlError={companyAstCareerUrlError}
+                setUrlError={setCompanyAstCareerUrlError}
+              />
+            </div>
+            {/* Key words */}
+            <div>
+              <Input
+                label={'Keywords'}
+                placeholder={'Keywords'}
+                inputValue={companyKeyWords}
+                setInputValue={setCompanyKeyWords}
+              />
+            </div>
+            {/* company description */}
+            <div className="mb-[15px]">
+              <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
+                About Company
+              </label>
+              {aboutCompany != undefined && aboutCompany != null && (
+                <TiptapEditor
+                  setEditorContent={setAboutCompany}
+                  editorContent={aboutCompany}
                 />
               )}
             </div>
-            <input
-              type="file"
-              id="resumeInput"
-              className="w-full h-full  absolute top-0 left-0 cursor-pointer opacity-0"
-              onChange={handleFileSelect}
-            />
-          </div>
-          <div className="flex flex-grow flex-col w-full">
-            <div className="flex sm:gap-8 flex-col sm:flex-row">
-              <div className="w-full flex-1 basis-[65%]">
-                <InputField
-                  label={'Company name'}
-                  placeholder={'Company name'}
-                  errorMessage={'Company Name is required'}
-                  inputValue={companyName}
-                  setInputValue={setCompanyName}
-                  isEmpty={companyNameError}
-                  setIsEmpty={setCompanyNameError}
-                />
-              </div>
-              <div className="w-full flex-1 basis-[45%]">
-                <DropDown
-                  label1={'Team Size'}
-                  placeholder={'Team Size'}
-                  dropdownList={companySizeOptions}
-                  selectedValue={companySize}
-                  setSelectedValue={setCompanySize}
-                />
-              </div>
+            <div className="mb-[25px]">
+              <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
+                Company Description
+              </label>
+              {companyDescription != undefined &&
+                companyDescription != null && (
+                  <TiptapEditor
+                    setEditorContent={setCompanyDescription}
+                    editorContent={companyDescription}
+                  />
+                )}
             </div>
-            <div className="flex w-full">
-              <Input
-                label={'tagline'}
-                placeholder={'Tagline'}
-                inputValue={companyTagline}
-                setInputValue={setCompanyTagline}
+            {/* Save Button */}
+            <div className="flex justify-end">
+              <ColouredButton
+                label={'Save'}
+                className=""
+                handelClick={handleSave}
               />
             </div>
           </div>
         </div>
-        {/* company urls */}
-        <div className="grid sm:grid-cols-2 gap-x-8">
-          <UrlField
-            label={'Company website'}
-            errorMessage={'Invalid Url'}
-            placeholder={'Company website'}
-            Url={companyWebsite}
-            setUrl={setCompanyWebsite}
-            UrlError={companyWebsiteError}
-            setUrlError={setCompanyWebsiteError}
+      ) : (
+        <div className="flex items-center justify-center flex-col">
+          <Image
+            src={companyDoesNotExist}
+            alt="Company does not exist"
+            className="opacity-60 w-fit-content h-fit-content mb-1"
+            width={500}
+            height={500}
           />
-          <UrlField
-            label={'Company Linkedin'}
-            errorMessage={'Invalid Url'}
-            placeholder={'Company Linkedin'}
-            Url={companyLinkedinUrl}
-            setUrl={setCompanyLinkedinUrl}
-            UrlError={companyLinkedinUrlError}
-            setUrlError={setCompanyLinkedinUrlError}
-          />
-          <UrlField
-            label={'Carreers page'}
-            placeholder={'Carreers page'}
-            errorMessage={'Invalid Url'}
-            Url={companyCarreerUrl}
-            setUrl={setCompanyCarreerUrl}
-            UrlError={companyCarreerUrlError}
-            setUrlError={setCompanyCarreerUrlError}
-          />
-          <UrlField
-            label={'AST Carreers page'}
-            errorMessage={'Invalid Url'}
-            placeholder={'AST Carreers page'}
-            Url={companyAstCareerUrl}
-            setUrl={setCompanyAstCareerUrl}
-            UrlError={companyAstCareerUrlError}
-            setUrlError={setCompanyAstCareerUrlError}
-          />
+          <Link
+            href="/admin/companies"
+            className="text-black dropshadow drop-shadow-lg text-[3rem] text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            Goto All Companies
+          </Link>
         </div>
-        {/* Key words */}
-        <div>
-          <Input
-            label={'Keywords'}
-            placeholder={'Keywords'}
-            inputValue={companyKeyWords}
-            setInputValue={setCompanyKeyWords}
-          />
-        </div>
-        {/* company description */}
-        <div className="mb-[15px]">
-          <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
-            About Company
-          </label>
-          {aboutCompany?.length > 0 && aboutCompany && (
-            <TiptapEditor
-              setEditorContent={setAboutCompany}
-              editorContent={aboutCompany}
-            />
-          )}
-        </div>
-        <div className="mb-[25px]">
-          <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
-            Company Description
-          </label>
-          {companyDescription?.length > 0 && companyDescription && (
-            <TiptapEditor
-              setEditorContent={setCompanyDescription}
-              editorContent={companyDescription}
-            />
-          )}
-        </div>
-        {/* Save Button */}
-        <div className="flex justify-end">
-          <ColouredButton
-            label={'Save'}
-            className=""
-            handelClick={handleSave}
-          />
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
