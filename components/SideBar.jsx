@@ -4,9 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import HomeLogo from '@/assets/HomeLogo.svg';
-import JobsLogo from '@/assets/JobsLogo.svg';
 import CompaniesLogo from '@/assets/CompaniesLogo.svg';
-import EventsLogo from '@/assets/EventsLogo.svg';
 import NotificationLogo from '@/assets/notifications.svg';
 import SettingsLogo from '@/assets/settings.svg';
 import SideBarLinkCard from '@/components/SideBarLinkCard';
@@ -55,7 +53,14 @@ const SideBar = () => {
           <div className="flex items-center justify-between  ">
             <Link href="/admin">
               <div className="w-[100px] cursor-pointer">
-                <Image src={BrandLogo} alt="Brand Logo" />
+                <Image
+                  width={100}
+                  height={100}
+                  src={BrandLogo}
+                  priority={false}
+                  alt="Brand Logo"
+                  className="w-[100px] h-fit "
+                />
               </div>
             </Link>
             <div className="flex gap-4">
@@ -152,6 +157,9 @@ const SideBar = () => {
               onClick={() => dispatch(uiActions.toggleSidebar())}>
               <Image
                 src={BrandLogo}
+                width={100}
+                height={24}
+                priority={true}
                 alt="Hamburger Logo"
                 className="w-fit h-[20px] "
               />

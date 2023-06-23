@@ -17,7 +17,7 @@ const Filters = [
     link: 'dreamcareers',
   },
 ];
-const JobsAndCompanies = ({}) => {
+const Companies = ({}) => {
   const router = useRouter();
 
   const companyId =
@@ -51,4 +51,4 @@ const JobsAndCompanies = ({}) => {
   );
 };
 
-export default JobsAndCompanies;
+export default Companies;

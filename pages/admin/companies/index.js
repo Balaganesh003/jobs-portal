@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import FilterCard from '@/components/FilterCard';
 import { useState } from 'react';
 import GridComponent from '@/components/CompaniesGrid';
 import CompaniesModal from '@/components/CompaniesModal';
