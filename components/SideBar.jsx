@@ -10,6 +10,10 @@ import EventsLogo from '@/assets/EventsLogo.svg';
 import NotificationLogo from '@/assets/notifications.svg';
 import SettingsLogo from '@/assets/settings.svg';
 import SideBarLinkCard from '@/components/SideBarLinkCard';
+import ProofLogo from '@/assets/proof-reading.png';
+import IdeaLogo from '@/assets/bulb.png';
+import ProgramsLogo from '@/assets/educational-programs.png';
+import StudentLogo from '@/assets/graduated.png';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -80,22 +84,6 @@ const SideBar = () => {
               link={'admin'}
             />
             <SideBarLinkCard
-              logo={JobsLogo}
-              isActive={active == 'jobs'}
-              text={'Jobs'}
-              handleClick={handleClick}
-              rounded={false}
-              link={'jobs'}
-            />
-            <SideBarLinkCard
-              logo={EventsLogo}
-              isActive={active == 'events'}
-              text={'Events'}
-              handleClick={handleClick}
-              rounded={false}
-              link={'events'}
-            />
-            <SideBarLinkCard
               logo={CompaniesLogo}
               isActive={active == 'companies'}
               text={'Companies'}
@@ -104,12 +92,38 @@ const SideBar = () => {
               link={'admin/companies'}
             />
             <SideBarLinkCard
-              logo={'https://xsgames.co/randomusers/avatar.php?g=pixel'}
-              isActive={active == 'Balaganesh K'}
-              text={'Balaganesh K'}
+              logo={StudentLogo}
+              isActive={active == 'students'}
+              text={'Students'}
               handleClick={handleClick}
-              rounded={true}
-              link={'balaganesh-k'}
+              rounded={false}
+              link={'admin/students'}
+            />
+            <SideBarLinkCard
+              logo={ProgramsLogo}
+              isActive={active == 'programs'}
+              text={'Programs'}
+              handleClick={handleClick}
+              rounded={false}
+              link={'admin/programs'}
+            />
+
+            <SideBarLinkCard
+              logo={IdeaLogo}
+              isActive={active == 'ideas'}
+              text={'Ideas'}
+              handleClick={handleClick}
+              rounded={false}
+              link={'admin/ideas'}
+            />
+
+            <SideBarLinkCard
+              logo={ProofLogo}
+              isActive={active == 'proofs'}
+              text={'Proofs'}
+              handleClick={handleClick}
+              rounded={false}
+              link={'admin/proofs'}
             />
           </div>
         </div>
@@ -149,23 +163,7 @@ const SideBar = () => {
                 isActive={active == 'admin'}
                 text={'Home'}
                 rounded={false}
-                link={'home'}
-              />
-              <SideBarLinkCard
-                logo={JobsLogo}
-                isActive={active == 'jobs'}
-                text={'Jobs'}
-                handleClick={handleClick}
-                rounded={false}
-                link={'jobs'}
-              />
-              <SideBarLinkCard
-                logo={EventsLogo}
-                isActive={active == 'events'}
-                text={'Events'}
-                handleClick={handleClick}
-                rounded={false}
-                link={'events'}
+                link={'admin'}
               />
               <SideBarLinkCard
                 logo={CompaniesLogo}
@@ -176,12 +174,38 @@ const SideBar = () => {
                 link={'admin/companies'}
               />
               <SideBarLinkCard
-                logo={'https://xsgames.co/randomusers/avatar.php?g=pixel'}
-                isActive={active == 'Balaganesh K'}
-                text={'Balaganesh K'}
+                logo={StudentLogo}
+                isActive={active == 'students'}
+                text={'Students'}
                 handleClick={handleClick}
-                rounded={true}
-                link={'balaganesh-k'}
+                rounded={false}
+                link={'admin/students'}
+              />
+              <SideBarLinkCard
+                logo={ProgramsLogo}
+                isActive={active == 'programs'}
+                text={'Programs'}
+                handleClick={handleClick}
+                rounded={false}
+                link={'admin/programs'}
+              />
+
+              <SideBarLinkCard
+                logo={IdeaLogo}
+                isActive={active == 'ideas'}
+                text={'Ideas'}
+                handleClick={handleClick}
+                rounded={false}
+                link={'admin/ideas'}
+              />
+
+              <SideBarLinkCard
+                logo={ProofLogo}
+                isActive={active == 'proofs'}
+                text={'Proofs'}
+                handleClick={handleClick}
+                rounded={false}
+                link={'admin/proofs'}
               />
             </div>
           </div>
