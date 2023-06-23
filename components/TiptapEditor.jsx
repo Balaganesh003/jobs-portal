@@ -177,7 +177,7 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const TiptapEditor = ({ setEditorContent }) => {
+const TiptapEditor = ({ setEditorContent, editorContent }) => {
   const editor = useEditor({
     extensions: [
       Placeholder.configure({
@@ -200,13 +200,12 @@ const TiptapEditor = ({ setEditorContent }) => {
         },
       }),
     ],
-    content: ``,
+    content: `${editorContent}`,
     onUpdate: ({ editor }) => {
       console.log(editor.getHTML());
       setEditorContent(editor.getHTML());
     },
   });
-
   return (
     <div className="w-full  bg-white border-[1px] rounded-lg ">
       <MenuBar editor={editor} className="menubar" />

@@ -22,7 +22,7 @@ const companySizeOptions = [
   '10000+ employees',
 ];
 
-const CompaniesModal = ({ handelModalOpen, handelModalClose, isModalOpen }) => {
+const CompaniesModal = ({ handelModalClose, isModalOpen }) => {
   const dispatch = useDispatch();
 
   const [companyName, setCompanyName] = useState('');
@@ -49,6 +49,7 @@ const CompaniesModal = ({ handelModalOpen, handelModalClose, isModalOpen }) => {
   };
 
   const companyObject = {
+    id: Math.floor(Math.random() * 1000000000000000),
     companyName,
     companyWebsite,
     companyDescription,
@@ -248,13 +249,19 @@ const CompaniesModal = ({ handelModalOpen, handelModalClose, isModalOpen }) => {
               <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
                 About Company
               </label>
-              <TiptapEditor setEditorContent={setAboutCompany} />
+              <TiptapEditor
+                setEditorContent={setAboutCompany}
+                editorContent={aboutCompany}
+              />
             </div>
             <div className="mb-[25px]">
               <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
                 Company Description
               </label>
-              <TiptapEditor setEditorContent={setCompanyDescription} />
+              <TiptapEditor
+                setEditorContent={setCompanyDescription}
+                editorContent={companyDescription}
+              />
             </div>
             {/* Save Button */}
             <div className="flex justify-end">

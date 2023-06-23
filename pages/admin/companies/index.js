@@ -30,10 +30,13 @@ const Companies = () => {
         {/* Cards section */}
         <div className="  pt-[2.25rem] p-[0.9375rem] ">
           <div className="flex justify-end">
-            <FilterCard
-              name={'Add Company'}
-              handelModalOpen={handelModalOpen}
-            />
+            <div
+              onClick={() => handelModalOpen()}
+              className="px-[14.5px] flex-shrink-0 py-[6px] my-[4px] mr-2 border border-black rounded w-fit h-[35px]">
+              <p className="text-[0.875rem] leading-[150%] font-semibold text-primary-text captilize cursor-pointer">
+                Add Company
+              </p>
+            </div>
           </div>
           <div className="w-full mt-4">
             <GridComponent items={companiesList} />

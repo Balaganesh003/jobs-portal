@@ -7,6 +7,7 @@ const nextConfig = {
       'res.cloudinary.com',
       'xsgames.co',
       'jumpstart-static.s3.amazonaws.com',
+      'www.google.com',
     ],
   },
 };

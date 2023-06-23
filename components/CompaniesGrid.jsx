@@ -39,7 +39,7 @@ const GridComponent = ({ items }) => {
         {columns?.map((column, index) => (
           <div key={index} className="flex gap-2 flex-col">
             {column?.map((item, itemIndex) => (
-              <Link href={`${item.companyName}`} key={itemIndex}>
+              <Link href={`/admin/companies/${item.id}`} key={itemIndex}>
                 <div
                   key={itemIndex}
                   className="p-1 text-link truncate text-ellipsis">

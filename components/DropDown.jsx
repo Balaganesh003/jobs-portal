@@ -69,11 +69,11 @@ const DropDown = ({
             type="text"
             name="text"
             placeholder={placeholder}
-            value={searchTerm}
+            value={searchTerm || selectedValue}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
             onKeyDown={handleInputKeyDown}
-            className={`w-full text-[1rem] bg-white h-12 rounded py-[0.1rem] pl-[0.875rem] pr-[2.5rem]  mb-[0.25rem]  text-primary-text border border-light-gray focus:outline-black`}
+            className={`w-full text-[1rem] bg-white h-12 rounded py-[0.1rem] px-[0.875rem]   mb-[0.25rem]  text-primary-text border border-light-gray focus:outline-black`}
           />
 
           {isOpen && (
