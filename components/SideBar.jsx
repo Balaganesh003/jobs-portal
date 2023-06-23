@@ -147,7 +147,9 @@ const SideBar = () => {
           {/*  */}
 
           <div className="cursor-pointer pt-[2rem] px-[1.25rem] pb-[0.5rem]">
-            <Link href="/" onClick={() => dispatch(uiActions.toggleSidebar())}>
+            <Link
+              href="/admin"
+              onClick={() => dispatch(uiActions.toggleSidebar())}>
               <Image
                 src={BrandLogo}
                 alt="Hamburger Logo"

@@ -18,8 +18,8 @@ const SideBarLinkCard = ({
         <Image
           src={logo}
           alt="Home Logo"
-          width={24}
-          height={24}
+          width={32}
+          height={32}
           className={`h-6 w-6 ml-1 mr-4 z-10  ${rounded && 'rounded-full'}`}
         />
         <p className="text-sm leading-[130%] text-primary-text z-10">{text}</p>
