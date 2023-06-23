@@ -32,24 +32,25 @@ const GridComponent = ({ items }) => {
     }
   };
 
-  const containerHeight = `calc(100vh - 8rem)`;
-
   const columns = Array.from({ length: numCols }, () => []);
 
-  items?.forEach((item, index) => {
-    const columnIndex = index % numCols;
-    columns[columnIndex]?.push(item);
+  let currentRow = 0;
+  let currentColumn = 0;
+  items?.forEach((item) => {
+    columns[currentColumn].push(item);
+    currentRow++;
+    if (currentRow >= numRows) {
+      currentRow = 0;
+      currentColumn = (currentColumn + 1) % numCols;
+    }
   });
 
   return (
-    <div
-      className="flex border items-start h-full  px-4 py-2"
-      id="gridContainer">
+    <div className="flex border items-start px-4 py-2" id="gridContainer">
       <div
-        className={`grid grid-cols-${numCols} gap-4 w-full`}
-        style={{ height: containerHeight }}>
+        className={`grid grid-cols-${numCols} gap-4 w-full h-full min-h-[calc(100vh-11.5rem)] lg:min-h-[calc(100vh-8rem)]`}>
         {columns?.map((column, index) => (
-          <div key={index} className="flex gap-2 flex-col bg-blue-200">
+          <div key={index} className="flex gap-2 flex-col">
             {column?.map((item, itemIndex) => (
               <Link href={`/admin/companies/${item.id}`} key={itemIndex}>
                 <div

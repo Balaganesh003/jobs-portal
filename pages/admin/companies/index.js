@@ -28,7 +28,7 @@ const Companies = () => {
         {/* Search Field */}
 
         {/* Cards section */}
-        <div className="  pt-[2.25rem] p-[0.9375rem] ">
+        <div className="  lg:pt-[2.25rem] p-[0.9375rem] ">
           <div className="flex justify-end">
             <div
               onClick={() => handelModalOpen()}

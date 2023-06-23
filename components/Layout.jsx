@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   return (
     <div className={`${inter.className} `}>
-      <div className="w-full bg-primary">
+      <div className="w-full bg-primary max-h-screen">
         {/* NavBar */}
         <NavBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
         {/* Sidebar */}
@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
           </div>
 
           {/* Main */}
-          <main id="main" className="w-full lg:overflow-y-auto ">
+          <main id="main" className="w-full lg:overflow-y-auto relative">
             {children}
             {/* Search and dropdown */}
           </main>
