@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   return (
     <div className={`${inter.className} `}>
-      <div className="w-full bg-primary max-h-screen">
+      <div className="w-full bg-primary ">
         {/* NavBar */}
         <NavBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
         {/* Sidebar */}
