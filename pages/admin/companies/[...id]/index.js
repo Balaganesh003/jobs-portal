@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterCard from '@/components/FilterCard';
 import CompanyPage from '@/components/CompanyPage';
 import { useRouter } from 'next/router';
@@ -28,14 +28,20 @@ const Filters = [
     link: 'careers',
   },
 ];
-const Companies = ({ paths }) => {
-  console.log(paths);
+const Companies = () => {
   const router = useRouter();
-
   const [currentActive, setcurrentActive] = useState('/');
 
   const companyId =
     router.query.id?.length > 0 ? router.query.id[0] : router.query.id;
+
+  const currentPath = router.asPath.split('/').pop();
+
+  useEffect(() => {
+    Filters.some((filter) => filter.link === currentPath)
+      ? setcurrentActive(currentPath)
+      : setcurrentActive('/');
+  }, [currentPath]);
 
   return (
     <div className="">
