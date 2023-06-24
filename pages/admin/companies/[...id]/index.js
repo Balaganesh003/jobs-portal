@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FilterCard from '@/components/FilterCard';
 import CompanyPage from '@/components/CompanyPage';
 import { useRouter } from 'next/router';
+import DreamCareers from '@/components/DreamCareers';
+import ExperienceTracker from '@/components/ExperienceTracker';
+import CareersPage from '@/components/CareersPage';
 
 const Filters = [
   {
-    name: 'Proofs',
-    link: 'proofs',
+    name: 'About',
+    link: '/',
   },
   {
     name: 'Job/Internships',
@@ -16,9 +19,20 @@ const Filters = [
     name: 'Dream Careers',
     link: 'dreamcareers',
   },
+  {
+    name: 'Experience Tracker',
+    link: 'experiencetracker',
+  },
+  {
+    name: 'Careers',
+    link: 'careers',
+  },
 ];
-const Companies = ({}) => {
+const Companies = ({ paths }) => {
+  console.log(paths);
   const router = useRouter();
+
+  const [currentActive, setcurrentActive] = useState('/');
 
   const companyId =
     router.query.id?.length > 0 ? router.query.id[0] : router.query.id;
@@ -26,11 +40,13 @@ const Companies = ({}) => {
   return (
     <div className="">
       <div className="w-full border-b sticky top-0 z-10 border-gray-border">
-        <div className="h-full w-full max-w-[62.5rem] mx-auto border-b border-gray-border flex  bg-white items-center z-10 justify-end">
+        <div className="h-full w-full max-w-[62.5rem] mx-auto border-b border-gray-border flex  bg-white items-center z-10 justify-start">
           <div className="sm:max-w-[62.5rem]   overflow-x-auto flex  ">
             <div className="flex flex-nowrap sm:flex-wrap">
               {Filters.map((filter, i) => (
                 <FilterCard
+                  currentActive={currentActive}
+                  setcurrentActive={setcurrentActive}
                   key={i}
                   companyId={companyId}
                   name={filter.name}
@@ -43,9 +59,11 @@ const Companies = ({}) => {
       </div>
       <div className="max-w-[62.5rem] w-full min-h-screen h-full mx-auto  mt-5 z-0">
         {/* Cards section */}
-        <div className="">
-          <CompanyPage />
-        </div>
+
+        {currentActive === '/' && <CompanyPage />}
+        {currentActive === 'dreamcareers' && <DreamCareers />}
+        {currentActive === 'experiencetracker' && <ExperienceTracker />}
+        {currentActive === 'careers' && <CareersPage />}
       </div>
     </div>
   );
