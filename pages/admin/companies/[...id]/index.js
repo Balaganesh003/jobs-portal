@@ -30,7 +30,7 @@ const Filters = [
 ];
 const Companies = () => {
   const router = useRouter();
-  const [currentActive, setcurrentActive] = useState('/');
+  const [currentActive, setcurrentActive] = useState(null);
 
   const companyId =
     router.query.id?.length > 0 ? router.query.id[0] : router.query.id;
@@ -41,6 +41,7 @@ const Companies = () => {
     Filters.some((filter) => filter.link === currentPath)
       ? setcurrentActive(currentPath)
       : setcurrentActive('/');
+    console.log(currentActive);
   }, [currentPath]);
 
   return (
@@ -65,8 +66,8 @@ const Companies = () => {
       </div>
       <div className="max-w-[62.5rem] w-full min-h-[calc(100vh-9rem)] md:mt-[15px] h-full mx-auto  z-0">
         {/* Cards section */}
-
-        {currentActive === '/' && <CompanyPage />}
+        {currentActive === null && <div>Loading...</div>}
+        {currentActive == '/' && <CompanyPage />}
         {currentActive === 'dreamcareers' && <DreamCareers />}
         {currentActive === 'experiencetracker' && <ExperienceTracker />}
         {currentActive === 'careers' && <CareersPage />}
