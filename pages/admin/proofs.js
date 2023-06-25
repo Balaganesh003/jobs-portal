@@ -13,7 +13,7 @@ const allProofs = [
 ];
 
 const Proofs = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [choosenProof, setChoosenProof] = useState(null);
 
   const handelModalOpen = () => {
