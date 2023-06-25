@@ -2,13 +2,14 @@ import React from 'react';
 import { useState } from 'react';
 import ModalLayout from '@/components/ModalLayout';
 import ProofsModal from '@/components/ProofsModal';
+import parser from 'html-react-parser';
 
 const allProofs = [
   {
     id: 1,
     postTitle:
       'Growing F&B startup team - Looking for data analysts (all levels of experience welcome)!',
-    ourTake: 'We are looking for a data analyst to join our team!',
+    ourTake: '<P>We are looking for a data analyst to join our team!</P>',
   },
 ];
 
@@ -58,7 +59,7 @@ const Proofs = () => {
 
               <div className="w-full">
                 <div className="ml-[5rem]  bg-green-500/10 shadow-green-500 p-[2rem] min-h-[5.8125rem] rounded-lg shadow-comment flex cursor-pointer ">
-                  {proof.ourTake}
+                  {parser(proof.ourTake)}
                 </div>
               </div>
             </div>
