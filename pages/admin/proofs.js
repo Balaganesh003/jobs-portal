@@ -3,6 +3,15 @@ import { useState } from 'react';
 import ModalLayout from '@/components/ModalLayout';
 import ProofsModal from '@/components/ProofsModal';
 
+const allProofs = [
+  {
+    id: 1,
+    title:
+      'Growing F&B startup team - Looking for data analysts (all levels of experience welcome)!',
+    ourTake: 'We are looking for a data analyst to join our team!',
+  },
+];
+
 const Proofs = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [choosenProof, setChoosenProof] = useState(null);
@@ -23,9 +32,6 @@ const Proofs = () => {
     <div>
       <div className=" bg-white overflow-y-auto">
         <div className="max-w-[62.5rem] w-full   mx-auto z-0">
-          {/* Search Field */}
-
-          {/* Cards section */}
           <div className="lg:pt-[2.25rem] p-[0.9375rem] ">
             <div className="flex justify-end">
               <div
@@ -37,6 +43,26 @@ const Proofs = () => {
               </div>
             </div>
           </div>
+          {/* Proofs */}
+          {allProofs.map((proof, i) => (
+            <div
+              key={i}
+              className="flex gap-[15px] flex-col w-[66%] mx-4 pb-12">
+              <div
+                onClick={() => setIsCreatePostOpen(true)}
+                className="mt-[1rem] bg-white p-[2rem] min-h-[5.8125rem] rounded-lg shadow-nav hover:scale-[101%] transform transition-all duration-200 ease-in-out-expo w-full flex cursor-pointer ">
+                <p className="text-[1rem] leading-[150%] text-secondary-text">
+                  {proof.title}
+                </p>
+              </div>
+
+              <div className="w-full">
+                <div className="ml-[5rem]  bg-green-500/10 shadow-green-500 p-[2rem] min-h-[5.8125rem] rounded-lg shadow-comment flex cursor-pointer ">
+                  {proof.ourTake}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       {/* Modal */}

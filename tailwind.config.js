@@ -49,6 +49,7 @@ module.exports = {
         button: '0 1px 4px rgba(0, 0, 0, 0.16)',
         search: '0 1px 8px rgba(0, 0, 0, 0.16)',
         onboard: '0 2px 32px rgba(0, 0, 0, 0.08)',
+        comment: '0px 0px 12px rgba(0, 0, 0, 0.16)',
       },
     },
   },
