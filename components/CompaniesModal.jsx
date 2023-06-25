@@ -49,7 +49,7 @@ const CompaniesModal = ({ handelModalClose, isModalOpen }) => {
   };
 
   const companyObject = {
-    id: Math.floor(Math.random() * 1000000000000000),
+    id: `${Math.floor(Math.random() * 1000000000000000)}`,
     companyName,
     companyWebsite,
     companyDescription,

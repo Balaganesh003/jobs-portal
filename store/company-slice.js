@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialPostsState = {
   companiesList: [
     {
-      id: 2343423423423,
+      id: '2343423423423',
       companyName: 'Google',
       companyWebsite: 'https://www.google.com/',
       companyDescription:

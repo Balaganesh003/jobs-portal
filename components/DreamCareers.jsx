@@ -16,9 +16,9 @@ const DreamCareers = () => {
   };
 
   return (
-    <div className="mobile-lg:p-[0.9375rem]  bg-white h-full min-h-[calc(100vh-4rem)]">
+    <div className="mobile-lg:p-[0.9375rem]  bg-white h-full  lg:min-h-[calc(100vh-4rem)] h-full">
       {/* Cards section */}
-      <div className="border p-[0.9375rem] min-h-[calc(100vh-5.75rem)] rounded-lg">
+      <div className="border p-[0.9375rem] min-h-[calc(100vh-10.35rem)] lg:min-h-[calc(100vh-5.75rem)] rounded-lg h-full">
         <div className="flex justify-between items-center">
           <p className="text-[1.25rem] pl-2 leading-[150%] font-semibold text-primary-text captilize cursor-pointer">
             Dream Career
