@@ -177,12 +177,12 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const TiptapEditor = ({ setEditorContent, editorContent }) => {
+const TiptapEditor = ({ setEditorContent, editorContent, placeholder }) => {
   const editor = useEditor({
     extensions: [
       Placeholder.configure({
         placeholder: () => {
-          return 'Description...';
+          return `${placeholder}`;
         },
       }),
       TextStyle.configure({ types: [ListItem.name] }),
