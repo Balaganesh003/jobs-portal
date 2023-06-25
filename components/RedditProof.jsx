@@ -19,6 +19,27 @@ const RedditProof = () => {
   const [redditPostUrlError, setRedditPostUrlError] = useState(false);
   const [redditUsername, setRedditUsername] = useState('');
   const [redditUsernameError, setRedditUsernameError] = useState(false);
+  const [comments, setComments] = useState([{ userName: '', comment: '' }]);
+
+  const addComment = () => {
+    setComments((prevComments) => [
+      ...prevComments,
+      { userName: '', comment: '' },
+    ]);
+  };
+
+  const deleteComment = () => {
+    comments.length > 1 &&
+      setComments((prevComments) => prevComments.slice(0, -1));
+  };
+
+  const updateComment = (index, field, value) => {
+    setComments((prevComments) => {
+      const updatedComments = [...prevComments];
+      updatedComments[index][field] = value;
+      return updatedComments;
+    });
+  };
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
@@ -32,7 +53,20 @@ const RedditProof = () => {
     }
   };
 
-  const handleSave = () => {};
+  const data = {
+    postTitle,
+    postUrl,
+    postDescription,
+    postImage,
+    ourTake,
+    redditPostUrl,
+    redditUsername,
+    comments,
+  };
+
+  const handleSave = () => {
+    console.log(data);
+  };
 
   return (
     <div>
@@ -127,6 +161,39 @@ const RedditProof = () => {
           placeholder="https://www.example.com"
         />
       </div>
+      <div className="mb-[15px]">
+        <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
+          Add comments
+        </label>
+        <div className="flex flex-col gap-[15px]">
+          {comments.map((comment, index) => (
+            <TiptapEditor
+              key={index}
+              editorContent={comment.comment}
+              setEditorContent={(value) =>
+                updateComment(index, 'comment', value)
+              }
+              placeholder={'Add a comment'}
+              username={comment.userName}
+              setUsername={(value) => updateComment(index, 'userName', value)}
+              isUsername={true}
+            />
+          ))}
+        </div>
+        <div className="flex justify-end gap-[15px] mt-[15px] ">
+          <div
+            onClick={deleteComment}
+            className="flex  gap-1 items-center pl-[14px] pr-[16px] max-h-[3rem] h-[2.5rem] border border-black rounded hover:-translate-y-0.5  hover:shadow-button ease-in-out-expo transform transition-transform duration-150 cursor-pointer">
+            <p className="text-[0.875rem] leading-[130%] text-primary-text font-semibold">
+              Delete comment
+            </p>
+          </div>
+          <div className="">
+            <ColouredButton label={'Add comment'} handelClick={addComment} />
+          </div>
+        </div>
+      </div>
+
       <div className="mb-[35px]">
         <label className="text-primary-text text-[0.875rem] leading-[150%] font-semibold inline-block mb-[0.375rem]">
           Our take

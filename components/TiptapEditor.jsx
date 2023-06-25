@@ -5,6 +5,8 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import Link from '@tiptap/extension-link';
 import {
   Bold,
@@ -177,7 +179,14 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const TiptapEditor = ({ setEditorContent, editorContent, placeholder }) => {
+const TiptapEditor = ({
+  setEditorContent,
+  editorContent,
+  placeholder,
+  username,
+  setUsername,
+  isUsername,
+}) => {
   const editor = useEditor({
     extensions: [
       Placeholder.configure({
@@ -202,14 +211,28 @@ const TiptapEditor = ({ setEditorContent, editorContent, placeholder }) => {
     ],
     content: `${editorContent}`,
     onUpdate: ({ editor }) => {
-      console.log(editor.getHTML());
       setEditorContent(editor.getHTML());
     },
   });
+
   return (
-    <div className="w-full  bg-white border-[1px] rounded-lg ">
+    <div className="w-full bg-white border-[1px] rounded-lg">
       <MenuBar editor={editor} className="menubar" />
-      <EditorContent editor={editor} className="" />
+      {isUsername && (
+        <div className="">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full  p-2   border-[2px] border-white focus:border-black focus:outline-none"
+          />
+        </div>
+      )}
+      <EditorContent
+        editor={editor}
+        className=" rounded-lg focus:outline-[2px]"
+      />
     </div>
   );
 };

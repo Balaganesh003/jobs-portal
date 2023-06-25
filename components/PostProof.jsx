@@ -28,7 +28,17 @@ const PostProof = () => {
     }
   };
 
-  const handleSave = () => {};
+  const data = {
+    postTitle,
+    postUrl,
+    postDescription,
+    postImage,
+    ourTake,
+  };
+
+  const handleSave = () => {
+    console.log(data);
+  };
 
   return (
     <div>
