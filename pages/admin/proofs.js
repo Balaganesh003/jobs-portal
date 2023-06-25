@@ -9,6 +9,7 @@ const Proofs = () => {
 
   const handelModalOpen = () => {
     setIsModalOpen(true);
+    setChoosenProof(null);
     document.body.style.overflow = 'hidden';
   };
 
@@ -43,6 +44,7 @@ const Proofs = () => {
         <ProofsModal
           choosenProof={choosenProof}
           setChoosenProof={setChoosenProof}
+          handelModalClose={handelModalClose}
         />
       </ModalLayout>
     </div>

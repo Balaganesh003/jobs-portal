@@ -8,7 +8,7 @@ import RedditProof from './RedditProof';
 
 const proofsList = ['Post', 'Reddit'];
 
-const ProofsModal = ({ choosenProof, setChoosenProof }) => {
+const ProofsModal = ({ choosenProof, setChoosenProof, handelModalClose }) => {
   return (
     <div className="h-full">
       <>
@@ -21,13 +21,18 @@ const ProofsModal = ({ choosenProof, setChoosenProof }) => {
           } w-1/2 lg:w-1/3`}>
           <DropDown
             dropdownList={proofsList}
+            selectedValue={choosenProof}
             setSelectedValue={setChoosenProof}
           />
         </div>
       </>
 
-      {choosenProof === 'Post' && <PostProof />}
-      {choosenProof === 'Reddit' && <RedditProof />}
+      {choosenProof === 'Post' && (
+        <PostProof handelModalClose={handelModalClose} />
+      )}
+      {choosenProof === 'Reddit' && (
+        <RedditProof handelModalClose={handelModalClose} />
+      )}
     </div>
   );
 };

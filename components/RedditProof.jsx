@@ -6,8 +6,9 @@ import ColouredButton from './ColouredButton';
 import Image from 'next/image';
 import DragDropLogo from '@/assets/DragDrop.svg';
 import UrlField from './UrlField';
+import { Toaster, toast } from 'react-hot-toast';
 
-const RedditProof = () => {
+const RedditProof = ({ handelModalClose }) => {
   const [postTitle, setPostTitle] = useState('');
   const [postTitleError, setPostTitleError] = useState(false);
   const [postUrl, setPostUrl] = useState('');
@@ -65,11 +66,24 @@ const RedditProof = () => {
   };
 
   const handleSave = () => {
-    console.log(data);
+    if (
+      postTitle === '' ||
+      postUrlError === true ||
+      postDescription === '' ||
+      redditUsername === '' ||
+      redditUsernameError === true
+    ) {
+      toast.error('Please fill all the required fields');
+    } else {
+      toast.success('Reddit Proof Saved Successfully');
+      handelModalClose();
+      console.log(data);
+    }
   };
 
   return (
     <div>
+      <Toaster />
       <div className="flex gap-[15px] w-full">
         <div className="flex-1 basis-[66%]">
           <UrlField

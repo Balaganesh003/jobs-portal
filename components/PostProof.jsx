@@ -6,8 +6,9 @@ import ColouredButton from './ColouredButton';
 import Image from 'next/image';
 import DragDropLogo from '@/assets/DragDrop.svg';
 import UrlField from './UrlField';
+import { Toaster, toast } from 'react-hot-toast';
 
-const PostProof = () => {
+const PostProof = ({ handelModalClose }) => {
   const [postTitle, setPostTitle] = useState('');
   const [postTitleError, setPostTitleError] = useState(false);
   const [postUrl, setPostUrl] = useState('');
@@ -37,18 +38,25 @@ const PostProof = () => {
   };
 
   const handleSave = () => {
-    console.log(data);
+    if (postTitle === '' || postUrlError === true || postDescription === '') {
+      toast.error('Please fill all the fields');
+    } else {
+      toast.success('Post Proof Saved Successfully');
+      handelModalClose();
+      console.log(data);
+    }
   };
 
   return (
     <div>
+      <Toaster />
       <div className="mb-[15px] ">
         <InputField
           label={'Post Title'}
           inputValue={postTitle}
           setInputValue={setPostTitle}
-          inputError={postTitleError}
-          setInputError={setPostTitleError}
+          isEmpty={postTitleError}
+          setIsEmpty={setPostTitleError}
           placeholder="Post Title"
         />
       </div>
