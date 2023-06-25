@@ -6,7 +6,7 @@ import ProofsModal from '@/components/ProofsModal';
 const allProofs = [
   {
     id: 1,
-    title:
+    postTitle:
       'Growing F&B startup team - Looking for data analysts (all levels of experience welcome)!',
     ourTake: 'We are looking for a data analyst to join our team!',
   },
@@ -52,7 +52,7 @@ const Proofs = () => {
                 onClick={() => setIsCreatePostOpen(true)}
                 className="mt-[1rem] bg-white p-[2rem] min-h-[5.8125rem] rounded-lg shadow-nav hover:scale-[101%] transform transition-all duration-200 ease-in-out-expo w-full flex cursor-pointer ">
                 <p className="text-[1rem] leading-[150%] text-secondary-text">
-                  {proof.title}
+                  {proof.postTitle}
                 </p>
               </div>
 
